@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Ngecas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ef32d9, #89fffd);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+        }
+        .box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .packages {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .package {
+            background: #f7f7f7;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #fff;
+            font-weight: bold;
+        }
+        .package.bronze {
+            background: linear-gradient(145deg, #cd7f32, #ffbf74);
+            border: 1px solid #ad6c29;
+        }
+        .package.silver {
+            background: linear-gradient(145deg, #c0c0c0, #e8e8e8);
+            border: 1px solid #a9a9a9;
+        }
+        .package.gold {
+            background: linear-gradient(145deg, #ffd700, #fff89e);
+            border: 1px solid #cca300;
+        }
+        .package.red {
+            background: linear-gradient(145deg, #ff4d4d, #ff7777);
+            border: 1px solid #cc0000;
+        }
+        .package:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .confirm-btn, .back-btn {
+            background: #4caf50;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .confirm-btn:hover, .back-btn:hover {
+            background: #45a049;
+        }
+        .back-btn {
+            background: #f44336;
+        }
+        .back-btn:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="homePage">
+        <h1>Rental Ngecas</h1>
+        <div class="box">
+            <h2>Pilih Paket</h2>
+            <div class="packages">
+                <div class="package bronze" onclick="pilihPaket(1, 3000)">1 Jam - Rp 3.000</div>
+                <div class="package silver" onclick="pilihPaket(2, 6000)">2 Jam - Rp 6.000</div>
+                <div class="package silver" onclick="pilihPaket(3, 9000)">3 Jam - Rp 9.000</div>
+                <div class="package silver" onclick="pilihPaket(4, 12000)">4 Jam - Rp 12.000</div>
+                <div class="package gold" onclick="pilihPaket(5, 15000)">5 Jam - Rp 15.000</div>
+                <div class="package gold" onclick="pilihPaket(6, 18000)">6 Jam - Rp 18.000</div>
+                <div class="package gold" onclick="pilihPaket(7, 21000)">7 Jam - Rp 21.000</div>
+                <div class="package red" onclick="pilihPaket(8, 24000)">8 Jam - Rp 24.000</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container hidden" id="formPage">
+        <h1>Detail Paket</h1>
+        <div class="box">
+            <div class="form-group">
+                <label for="nama">Nama Anda</label>
+                <input type="text" id="nama" placeholder="Masukkan Nama Anda">
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga</label>
+                <input type="text" id="harga" readonly>
+            </div>
+            <div class="form-group">
+                <label for="jam">Durasi</label>
+                <input type="text" id="jam" readonly>
+            </div>
+            <button class="confirm-btn" onclick="konfirmasi()">Konfirmasi</button>
+            <button class="back-btn" onclick="kembali()">Kembali</button>
+        </div>
+    </div>
+
+    <script>
+        function pilihPaket(jam, harga) {
+            // Pindah ke halaman form
+            document.getElementById("homePage").classList.add("hidden");
+            document.getElementById("formPage").classList.remove("hidden");
+
+            // Isi nilai jam dan harga
+            document.getElementById("jam").value = `${jam} Jam`;
+            document.getElementById("harga").value = `Rp ${harga}`;
+        }
+
+        function kembali() {
+            // Kembali ke halaman pilihan paket
+            document.getElementById("formPage").classList.add("hidden");
+            document.getElementById("homePage").classList.remove("hidden");
+        }
+
+        function konfirmasi() {
+            const nama = document.getElementById("nama").value;
+            const jam = document.getElementById("jam").value;
+            const harga = document.getElementById("harga").value;
+            const nomorWA = "6285143495287"; // Nomor WhatsApp
+            const pesan = `Aktivasi Rental Cas Oleh ${nama} Dengan Total Harga ${harga} Pilihan Jam ${jam}.`;
+
+            if (nama === "") {
+                alert("Masukkan nama Anda!");
+                return;
+            }
+
+            const linkWA = `https://wa.me/${nomorWA}?text=${encodeURIComponent(pesan)}`;
+            window.open(linkWA, "_blank");
+        }
+    </script>
+</body>
+</html>
